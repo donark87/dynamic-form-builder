@@ -15,7 +15,7 @@ This Angular application allows users to dynamically create custom forms. The ap
 
 1. **Clone the repository**:
     ```bash
-    git clone <repository_url>
+    git clone https://github.com/donark87/dynamic-form-builder.git
     cd dynamic-form-builder
     ```
 
