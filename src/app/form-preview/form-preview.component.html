@@ -1,0 +1,42 @@
+<div class="form-preview container mt-4 p-4 border">
+  <h3 class="display-4 mb-4">Form Preview</h3>
+
+  <form>
+    <div cdkDropList class="form-list" (cdkDropListDropped)="drop($event)">
+      <div *ngFor="let field of fields; let i = index" class="mb-3" cdkDrag>
+        <label class="form-label">{{field.label}}</label>
+
+
+        <input *ngIf="field.type === 'text'" class="form-control" [placeholder]="field.placeholder" />
+
+
+        <select *ngIf="field.type === 'dropdown'" class="form-select">
+          <option *ngFor="let option of field.options">{{option}}</option>
+        </select>
+
+
+        <div *ngIf="field.type === 'checkbox'" class="form-check">
+          <input type="checkbox" class="form-check-input" />
+        </div>
+
+
+        <div *ngIf="field.type === 'radio'">
+          <div *ngFor="let option of field.options" class="form-check">
+            <input type="radio" class="form-check-input" name="radio-{{field.label}}" />
+            <label class="form-check-label">{{option}}</label>
+          </div>
+        </div>
+      </div>
+
+      <span class="drag-handle" cdkDragHandle>⇅ Rearrange form elements by drag and drop</span>
+    </div>
+    <div class="mt-4">
+      <button class="btn btn-primary bi bi-floppy me-2" (click)="saveAsJson()"> Save form configuration</button>
+      <button type="button" class="btn btn-secondary bi bi-check2-circle me-2" (click)="validateFields()"> Validate form
+        configuration</button>
+      <br>
+      <label class="form-label">Note: The 'Validate Form Configuration' button checks the structure and setup of form
+        elements, not individual field validations.</label>
+    </div>
+  </form>
+</div>

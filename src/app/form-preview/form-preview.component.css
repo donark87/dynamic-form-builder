@@ -1,0 +1,21 @@
+
+.form-list {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .drag-handle {
+    cursor: move;
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 18px;
+  }
+  
+  .cdk-drag-preview {
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+  }
+  
+  .cdk-drag-placeholder {
+    opacity: 0;
+  }

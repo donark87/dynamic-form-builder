@@ -1,0 +1,24 @@
+<div class="container p-4 border">
+  <h2 class="display-4 mb-4">Form Builder</h2>
+
+  <div class="mb-4">
+    <button class="btn btn-primary bi bi-input-cursor-text me-2" (click)="addField('text')"> Add Text Field</button>
+    <button class="btn btn-primary bi bi-menu-button-wide-fill me-2" (click)="addField('dropdown')"> Add Dropdown</button>
+    <button class="btn btn-primary bi bi-check2-square me-2" (click)="addField('checkbox')"> Add Checkbox</button>
+    <button class="btn btn-primary bi bi-record-circle me-2" (click)="addField('radio')"> Add Radio Button</button>
+  </div>
+
+  <div class="mb-4">
+    <div *ngFor="let field of fields$ | async; let i = index" class="mb-3">
+      <app-field-editor 
+        [field]="field" 
+        (remove)="removeField(field.id)" 
+        (update)="updateField(field.id, $event)">
+      </app-field-editor>
+    </div>
+  </div>
+
+  <ng-container *ngIf="(fields$ | async) as fields">
+    <app-form-preview [fields]="fields"></app-form-preview>
+  </ng-container>    
+</div>

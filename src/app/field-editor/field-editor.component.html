@@ -1,0 +1,53 @@
+
+<div class="field-editor border p-3 mb-3">
+  <div class="mb-3">
+    <label class="form-label">Field Type: <strong>{{ getFieldType() }}</strong></label>
+  </div>
+ 
+  <div class="mb-3">
+    <input class="form-control" [(ngModel)]="field.label" placeholder="Label" />
+  </div>
+
+
+  <div class="mb-3" *ngIf="field.type === 'text'">
+    <input class="form-control" [(ngModel)]="field.placeholder" placeholder="Placeholder" />
+  </div>
+
+
+  <div class="mb-3" *ngIf="field.type === 'text'">
+    <label for="minLength" class="form-label">Min Length</label>
+    <input id="minLength" class="form-control" type="number" [(ngModel)]="field.minLength" placeholder="Min Length" min="1" />
+  </div>
+  <div class="mb-3" *ngIf="field.type === 'text'">
+    <label for="maxLength" class="form-label">Max Length</label>
+    <input id="maxLength" class="form-control" type="number" [(ngModel)]="field.maxLength" placeholder="Max Length" min="1" />
+  </div>
+
+
+  <div class="mb-3" *ngIf="field.options and isOptionsField()">
+    <label>Options</label>
+    <div *ngFor="let option of field.options; let i = index; trackBy: trackByIndex" class="input-group mb-2">
+      <input class="form-control" [(ngModel)]="field.options[i]" (ngModelChange)="updateOption(i, $event)" placeholder="Option {{i+1}}" />
+      <button class="btn btn-outline-danger bi bi-trash3" (click)="removeOption(i)"> Remove</button>
+    </div>
+    <div class="mb-3">
+      <button class="btn btn-outline-primary bi bi-menu-button-wide-fill " (click)="addOption()"> Add Option</button>
+    </div>
+  </div>
+
+
+  <div class="form-check mb-3">
+    <input class="form-check-input" type="checkbox" [(ngModel)]="field.required" />
+    <label class="form-check-label">Required</label>
+  </div>
+
+
+  <button class="btn btn-danger bi bi-trash3 me-2" (click)="remove.emit()"> Remove</button>
+
+
+  <div *ngIf="validationErrors.length > 0" class="alert alert-danger">
+    <ul>
+      <li *ngFor="let error of validationErrors">{{ error }}</li>
+    </ul>
+  </div>
+</div>
